@@ -1,7 +1,6 @@
 # Geopolítica, Crudo WTI y Mercados Financieros: Análisis Predictivo e Inteligencia en Tiempo Real
 
-**Proyecto de portfolio — Master AFI Madrid**
-
+**Proyecto de portfolio
 ---
 
 ## Resumen ejecutivo
