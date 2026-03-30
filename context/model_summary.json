@@ -1,0 +1,70 @@
+{
+  "proyecto": "Geopolítica y Crudo WTI — Análisis Predictivo (Parte 1)",
+  "objetivo": "Clasificación binaria: predecir si el día siguiente es de alta tensión en el mercado WTI (con 1 día de antelación)",
+  "periodo_train": "2015-01-05 a 2020-12-31",
+  "periodo_test": "2021-01-01 a 2026-03-13",
+  "variable_objetivo": {
+    "nombre": "high_stress_day",
+    "definicion": "abs_return_{t+1} > 0.0247 (P80 train) OR delta_ovx_{t+1} > 1.042 (P80 train)",
+    "tasa_positivos_train": "33.2%",
+    "tasa_positivos_test": "~35%"
+  },
+  "mejor_modelo": {
+    "algoritmo": "Random Forest (profundidad máx = 3, umbral decisión = 0.46)",
+    "configuracion": "RandomForest all (md=3, thr=0.46) — usa las 67 variables predictoras",
+    "metricas_test": {
+      "F1": 0.5706,
+      "precision": 0.414,
+      "recall": 0.9180,
+      "AUC_ROC": 0.6154
+    }
+  },
+  "comparacion_modelos": [
+    {"modelo": "LogReg mercado (C=0.01, thr=0.42)", "F1": 0.552, "AUC": 0.585},
+    {"modelo": "LogReg todas vars (C=0.1, thr=0.46)", "F1": 0.541, "AUC": 0.578},
+    {"modelo": "RandomForest mercado (md=3, thr=0.44)", "F1": 0.555, "AUC": 0.614},
+    {"modelo": "RandomForest todas vars (md=3, thr=0.46)", "F1": 0.571, "AUC": 0.615},
+    {"modelo": "XGBoost mercado (iter=999, thr=0.62)", "F1": 0.368, "AUC": 0.557},
+    {"modelo": "XGBoost todas vars (iter=999, thr=0.38)", "F1": 0.512, "AUC": 0.562}
+  ],
+  "top10_features_SHAP": [
+    {"rank": 1, "feature": "ovx_lag1", "grupo": "mercado", "importancia_media": 0.0989, "descripcion": "OVX del día anterior — volatilidad implícita del petróleo rezagada 1 día"},
+    {"rank": 2, "feature": "ovx_high_dummy", "grupo": "mercado", "importancia_media": 0.0754, "descripcion": "Variable indicadora: OVX > P80 histórico"},
+    {"rank": 3, "feature": "vol20_lag1", "grupo": "mercado", "importancia_media": 0.0537, "descripcion": "Volatilidad realizada 20 días rezagada 1 día"},
+    {"rank": 4, "feature": "goldstein_x_ovx", "grupo": "interaccion", "importancia_media": 0.0493, "descripcion": "Interacción: Goldstein GDELT × OVX (tensión geopolítica × volatilidad mercado)"},
+    {"rank": 5, "feature": "vol10_lag1", "grupo": "mercado", "importancia_media": 0.0490, "descripcion": "Volatilidad realizada 10 días rezagada 1 día"},
+    {"rank": 6, "feature": "dxy_lag3", "grupo": "vix_dxy", "importancia_media": 0.0295, "descripcion": "DXY rezagado 3 días"},
+    {"rank": 7, "feature": "dxy_rolling5", "grupo": "vix_dxy", "importancia_media": 0.0288, "descripcion": "Media móvil DXY 5 días"},
+    {"rank": 8, "feature": "dxy_rolling10", "grupo": "vix_dxy", "importancia_media": 0.0282, "descripcion": "Media móvil DXY 10 días"},
+    {"rank": 9, "feature": "dxy_lag1", "grupo": "vix_dxy", "importancia_media": 0.0274, "descripcion": "DXY rezagado 1 día"},
+    {"rank": 10, "feature": "vix_lag3", "grupo": "vix_dxy", "importancia_media": 0.0206, "descripcion": "VIX rezagado 3 días"}
+  ],
+  "umbrales_criticos": {
+    "abs_return_P80_train": 0.0247,
+    "delta_ovx_P80_train": 1.042,
+    "gpr_nivel_alto": ">120 (percentil 75 histórico aprox.)",
+    "ovx_nivel_alto": ">40 (umbral señal de alerta)",
+    "goldstein_tension": "<-3.0 (zona de conflicto significativo)"
+  },
+  "n_features_total": 67,
+  "grupos_features": {
+    "mercado": 16,
+    "vix_dxy": 16,
+    "gdelt": 24,
+    "gpr": 6,
+    "interaccion": 5
+  },
+  "validacion_cruzada": {
+    "metodo": "TimeSeriesSplit(n_splits=5)",
+    "justificacion": "Respeta el orden temporal; prohíbe el uso de datos futuros para entrenar"
+  },
+  "anti_leakage": {
+    "protocolo": "Todas las variables predictoras usan .shift(lag) con lag>=1",
+    "percentiles_P80": "Calculados únicamente sobre el conjunto de entrenamiento (2015-2020)"
+  },
+  "interpretacion_resultados": {
+    "conclusion_principal": "La señal geopolítica existe y es estadísticamente distinguible (AUC 0.615 vs 0.50 azar), pero es débil",
+    "hallazgo_clave": "Las variables de memoria del propio mercado (OVX, volatilidad histórica) predicen mejor que los indicadores geopolíticos externos",
+    "implicacion": "Consistente con hipótesis de mercados semi-eficientes: la información geopolítica pública ya ha sido parcialmente incorporada al precio"
+  }
+}

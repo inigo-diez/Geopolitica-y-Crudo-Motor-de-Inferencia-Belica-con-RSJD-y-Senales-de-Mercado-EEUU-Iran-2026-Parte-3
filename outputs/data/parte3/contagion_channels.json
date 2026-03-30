@@ -1,0 +1,85 @@
+[
+  {
+    "canal":"Canal 1 — Inflacion-Tipos-Renta Variable",
+    "cadena":"GPR↑ → OVX↑ → WTI↑ → IPC↑ → Fed pausa → yields↑ → S&P↓",
+    "activos":[
+      "WTI",
+      "OVX",
+      "TNX",
+      "S&P 500"
+    ],
+    "in_model":"Parcialmente. GPR→WTI modelado en Partes 1-2. WTI→macro NO modelado.",
+    "real_today":"WTI +71% YTD. TNX en P88. S&P -4.95% YTD. Canal activo.",
+    "comportamiento_esperado":"WTI↑, TNX↑, S&P↓",
+    "comportamiento_real":"WTI↑ (con swing -14% hoy), TNX↑, S&P↓ leve pero NO crash",
+    "divergencia":"S&P mas resiliente de lo esperado. El mercado descuenta resolucion rapida.",
+    "precedente":"1973-74 (embargo petroleo → stagflacion → S&P -48%). 2022 (Ucrania → Fed sube tipos).",
+    "in_domain":true
+  },
+  {
+    "canal":"Canal 2 — Safe Haven Paradox",
+    "cadena":"GPR↑ → WTI↑ → IPC↑ → tipos reales↑ → ORO↓ (a pesar del riesgo geopolitico)",
+    "activos":[
+      "Oro",
+      "Plata",
+      "TNX"
+    ],
+    "in_model":"NO. El modelo de Parte 1 no incluye oro. Canal no modelado.",
+    "real_today":"Oro -8.8% intradiario. Plata -10%. Oro es el safe haven que NO funcionó.",
+    "comportamiento_esperado":"Oro↑ (refugio), Plata↑",
+    "comportamiento_real":"Oro↓ intradiario (-8.8%), recuperacion parcial a cierre. Plata↓.",
+    "divergencia":"La paradoja se materializo hoy. Canal de tipos reales domino sobre canal de aversion al riesgo.",
+    "precedente":"1980-81 (tipos Volcker → oro cayo de $800 a $400). Sin equivalente en el dataset.",
+    "in_domain":false
+  },
+  {
+    "canal":"Canal 3 — Risk-off Selectivo",
+    "cadena":"GPR↑ → VIX↑ → S&P↓ → BTC↑ (activos fuera del sistema financiero tradicional)",
+    "activos":[
+      "VIX",
+      "S&P 500",
+      "Bitcoin"
+    ],
+    "in_model":"NO. Bitcoin no existe en el modelo. Canal completamente nuevo.",
+    "real_today":"VIX 31→20 (rebote post-tweet). BTC +4.56%. S&P rebote moderado.",
+    "comportamiento_esperado":"BTC correlacionado negativamente con S&P (risk-off general)",
+    "comportamiento_real":"BTC SUBIO mientras WTI caia. Posible desacoplamiento del perfil 'activo de riesgo'.",
+    "divergencia":"Primera vez (potencialmente) que BTC actua como refugio durante crisis energetica. N=1.",
+    "precedente":"Sin precedente relevante en el dataset. Canal post-2020.",
+    "in_domain":false
+  },
+  {
+    "canal":"Canal 4 — Equity Energetico Desacoplado",
+    "cadena":"WTI↑ → revenues de XOM\/CVX↑ → equity energetico outperforms → rotacion sectorial",
+    "activos":[
+      "WTI",
+      "XOM",
+      "CVX",
+      "S&P 500"
+    ],
+    "in_model":"Parcialmente. El modelo no incluye equity individual pero el canal es bien conocido.",
+    "real_today":"XOM +33.6% YTD, CVX +34.8% YTD. S&P -4.95% YTD. Desacoplamiento extremo.",
+    "comportamiento_esperado":"XOM\/CVX↑ con WTI↑",
+    "comportamiento_real":"Confirmado. XOM y CVX son los principales ganadores del shock.",
+    "divergencia":"Sin divergencia. El canal funciona exactamente como predice el modelo.",
+    "precedente":"2022 (Ucrania): XOM +87% YTD, S&P -19% YTD. Patron identico.",
+    "in_domain":true
+  },
+  {
+    "canal":"Canal 5 — Factor Trump (no modelable)",
+    "cadena":"Post en red social → expectativa diplomatica → WTI -14% en 5min → Iran desmiente → recuperacion parcial",
+    "activos":[
+      "WTI",
+      "Oro",
+      "S&P 500",
+      "VIX"
+    ],
+    "in_model":"NO. Este canal es estructuralmente imposible de modelar con datos historicos.",
+    "real_today":"07:05 ET: WTI $98.59 → $84.37 en una barra. $3T de capitalizacion bursatil en 56 minutos.",
+    "comportamiento_esperado":"No modelable. El modelo historico no tiene este canal.",
+    "comportamiento_real":"El mayor swing intradiario de WTI registrado. Causado por un tweet.",
+    "divergencia":"DIVERGENCIA MAXIMA. El modelo no puede anticipar, detectar ni modelar este tipo de evento.",
+    "precedente":"Sin precedente en la historia del mercado del crudo. Primer ejemplo de precio del petroleo movido principalmente por una red social.",
+    "in_domain":false
+  }
+]

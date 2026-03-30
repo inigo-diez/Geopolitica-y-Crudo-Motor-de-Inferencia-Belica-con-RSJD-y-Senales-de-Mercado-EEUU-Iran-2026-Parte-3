@@ -1,0 +1,329 @@
+{
+  "proyecto": "Geopolítica y Crudo WTI — Análisis Predictivo (Parte 1)",
+  "archivo": "outputs/master_dataset.parquet",
+  "n_filas": 2800,
+  "n_columnas": 29,
+  "rango_temporal": {
+    "inicio": "2015-01-05",
+    "fin": "2026-03-13"
+  },
+  "frecuencia": "diaria (días hábiles NYSE)",
+  "split_train_test": {
+    "train": "2015-01-05 a 2020-12-31",
+    "test": "2021-01-01 a 2026-03-13"
+  },
+  "variable_objetivo": {
+    "nombre": "high_stress_day",
+    "definicion": "abs_return_t1 > P80_train(0.0247) OR delta_ovx_t1 > P80_train(1.042)",
+    "tasa_positivos_total": "33.2%"
+  },
+  "columnas": [
+    {
+      "nombre": "date",
+      "tipo_dato": "datetime64[us]",
+      "grupo": "indice_temporal",
+      "descripcion": "Fecha de negociación (días hábiles NYSE)",
+      "nulos_pct": 0.0
+    },
+    {
+      "nombre": "wti",
+      "tipo_dato": "float64",
+      "grupo": "mercado_crudo",
+      "descripcion": "Precio spot WTI USD/barril (FRED)",
+      "nulos_pct": 0.0,
+      "min": -36.98,
+      "max": 123.64,
+      "media": 62.4774,
+      "std": 17.5518
+    },
+    {
+      "nombre": "brent",
+      "tipo_dato": "float64",
+      "grupo": "mercado_crudo",
+      "descripcion": "Precio spot Brent USD/barril (EIA)",
+      "nulos_pct": 1.18,
+      "min": 9.12,
+      "max": 133.18,
+      "media": 66.4692,
+      "std": 18.6325
+    },
+    {
+      "nombre": "ovx",
+      "tipo_dato": "float64",
+      "grupo": "mercado_crudo",
+      "descripcion": "OVX: Oil Volatility Index CBOE (vol. implícita opciones WTI)",
+      "nulos_pct": 0.0,
+      "min": 17.86,
+      "max": 325.15,
+      "media": 40.3914,
+      "std": 18.4608
+    },
+    {
+      "nombre": "vix",
+      "tipo_dato": "float64",
+      "grupo": "volatilidad_macro",
+      "descripcion": "VIX: CBOE Volatility Index (vol. implícita S&P500)",
+      "nulos_pct": 0.0,
+      "min": 9.14,
+      "max": 82.69,
+      "media": 18.338,
+      "std": 7.0872
+    },
+    {
+      "nombre": "dxy",
+      "tipo_dato": "float64",
+      "grupo": "volatilidad_macro",
+      "descripcion": "DXY: Índice del dólar ponderado por comercio",
+      "nulos_pct": 0.0,
+      "min": 88.59,
+      "max": 114.11,
+      "media": 98.3067,
+      "std": 4.825
+    },
+    {
+      "nombre": "return_t",
+      "tipo_dato": "float64",
+      "grupo": "mercado_crudo",
+      "descripcion": "Retorno log diario WTI ln(Pt/Pt-1)",
+      "nulos_pct": 0.11,
+      "min": -0.2814,
+      "max": 0.4258,
+      "media": 0.0005,
+      "std": 0.0307
+    },
+    {
+      "nombre": "abs_return_t",
+      "tipo_dato": "float64",
+      "grupo": "mercado_crudo",
+      "descripcion": "Valor absoluto del retorno (proxy vol. realizada)",
+      "nulos_pct": 0.11,
+      "min": 0.0,
+      "max": 0.4258,
+      "media": 0.0192,
+      "std": 0.024
+    },
+    {
+      "nombre": "rolling_vol_5",
+      "tipo_dato": "float64",
+      "grupo": "mercado_crudo",
+      "descripcion": "Volatilidad móvil 5 días (std retornos)",
+      "nulos_pct": 0.11,
+      "min": 0.0024,
+      "max": 0.2857,
+      "media": 0.0231,
+      "std": 0.0212
+    },
+    {
+      "nombre": "rolling_vol_10",
+      "tipo_dato": "float64",
+      "grupo": "mercado_crudo",
+      "descripcion": "Volatilidad móvil 10 días",
+      "nulos_pct": 0.18,
+      "min": 0.0056,
+      "max": 0.2162,
+      "media": 0.0239,
+      "std": 0.0198
+    },
+    {
+      "nombre": "rolling_vol_20",
+      "tipo_dato": "float64",
+      "grupo": "mercado_crudo",
+      "descripcion": "Volatilidad móvil 20 días",
+      "nulos_pct": 0.36,
+      "min": 0.0076,
+      "max": 0.1762,
+      "media": 0.0244,
+      "std": 0.0187
+    },
+    {
+      "nombre": "delta_ovx_t",
+      "tipo_dato": "float64",
+      "grupo": "mercado_crudo",
+      "descripcion": "Variación diaria del OVX",
+      "nulos_pct": 0.07,
+      "min": -90.61,
+      "max": 130.22,
+      "media": 0.0218,
+      "std": 5.0783
+    },
+    {
+      "nombre": "spread_wti_brent",
+      "tipo_dato": "float64",
+      "grupo": "mercado_crudo",
+      "descripcion": "Diferencial WTI-Brent",
+      "nulos_pct": 1.18,
+      "min": -54.34,
+      "max": 5.66,
+      "media": -4.0817,
+      "std": 2.8896
+    },
+    {
+      "nombre": "event_count_total",
+      "tipo_dato": "int64",
+      "grupo": "gdelt_noticias",
+      "descripcion": "GDELT: eventos geopolíticos diarios en zonas productoras",
+      "nulos_pct": 0.0,
+      "min": 0.0,
+      "max": 57.0,
+      "media": 10.1761,
+      "std": 8.0489
+    },
+    {
+      "nombre": "mentions_total",
+      "tipo_dato": "int64",
+      "grupo": "gdelt_noticias",
+      "descripcion": "GDELT: menciones totales en noticias",
+      "nulos_pct": 0.0,
+      "min": 0.0,
+      "max": 2623.0,
+      "media": 297.6632,
+      "std": 276.888
+    },
+    {
+      "nombre": "avg_tone_daily",
+      "tipo_dato": "float64",
+      "grupo": "gdelt_noticias",
+      "descripcion": "GDELT: tono medio noticias (neg=conflicto, pos=cooperación)",
+      "nulos_pct": 0.0,
+      "min": -21.7391,
+      "max": 4.1667,
+      "media": -3.7583,
+      "std": 2.1559
+    },
+    {
+      "nombre": "goldstein_mean",
+      "tipo_dato": "float64",
+      "grupo": "gdelt_noticias",
+      "descripcion": "GDELT: escala Goldstein media diaria (-10 a +10)",
+      "nulos_pct": 0.0,
+      "min": -10.0,
+      "max": 7.4,
+      "media": -3.3758,
+      "std": 3.1622
+    },
+    {
+      "nombre": "goldstein_min",
+      "tipo_dato": "float64",
+      "grupo": "gdelt_noticias",
+      "descripcion": "GDELT: escala Goldstein mínima diaria (evento más conflictivo)",
+      "nulos_pct": 0.0,
+      "min": -10.0,
+      "max": 7.4,
+      "media": -8.0918,
+      "std": 3.3476
+    },
+    {
+      "nombre": "count_military",
+      "tipo_dato": "int64",
+      "grupo": "gdelt_noticias",
+      "descripcion": "GDELT: eventos categoría militar (CAMEO 1x)",
+      "nulos_pct": 0.0,
+      "min": 0.0,
+      "max": 35.0,
+      "media": 3.8854,
+      "std": 3.7909
+    },
+    {
+      "nombre": "count_diplomatic",
+      "tipo_dato": "int64",
+      "grupo": "gdelt_noticias",
+      "descripcion": "GDELT: eventos diplomáticos (CAMEO 04-06)",
+      "nulos_pct": 0.0,
+      "min": 0.0,
+      "max": 36.0,
+      "media": 3.2346,
+      "std": 3.4214
+    },
+    {
+      "nombre": "count_armed",
+      "tipo_dato": "int64",
+      "grupo": "otro",
+      "descripcion": "",
+      "nulos_pct": 0.0,
+      "min": 0.0,
+      "max": 17.0,
+      "media": 1.6429,
+      "std": 2.2728
+    },
+    {
+      "nombre": "count_agreement",
+      "tipo_dato": "int64",
+      "grupo": "otro",
+      "descripcion": "",
+      "nulos_pct": 0.0,
+      "min": 0.0,
+      "max": 0.0,
+      "media": 0.0,
+      "std": 0.0
+    },
+    {
+      "nombre": "extreme_event_dummy",
+      "tipo_dato": "int64",
+      "grupo": "otro",
+      "descripcion": "",
+      "nulos_pct": 0.0,
+      "min": 0.0,
+      "max": 1.0,
+      "media": 0.7968,
+      "std": 0.4025
+    },
+    {
+      "nombre": "gpr",
+      "tipo_dato": "str",
+      "grupo": "riesgo_geopolitico",
+      "descripcion": "GPR: Geopolitical Risk Index global (Caldara & Iacoviello 2022)",
+      "nulos_pct": 0.0
+    },
+    {
+      "nombre": "gpr_act",
+      "tipo_dato": "str",
+      "grupo": "riesgo_geopolitico",
+      "descripcion": "GPR: componente de actos geopolíticos realizados",
+      "nulos_pct": 0.0
+    },
+    {
+      "nombre": "gpr_threat",
+      "tipo_dato": "float64",
+      "grupo": "riesgo_geopolitico",
+      "descripcion": "GPR: componente de amenazas geopolíticas percibidas",
+      "nulos_pct": 0.0,
+      "min": 7.89,
+      "max": 809.49,
+      "media": 141.051,
+      "std": 77.1638
+    },
+    {
+      "nombre": "abs_return_t1",
+      "tipo_dato": "float64",
+      "grupo": "otro",
+      "descripcion": "",
+      "nulos_pct": 0.07,
+      "min": 0.0,
+      "max": 0.4258,
+      "media": 0.0192,
+      "std": 0.024
+    },
+    {
+      "nombre": "delta_ovx_t1",
+      "tipo_dato": "float64",
+      "grupo": "otro",
+      "descripcion": "",
+      "nulos_pct": 0.04,
+      "min": -90.61,
+      "max": 130.22,
+      "media": 0.0157,
+      "std": 5.0876
+    },
+    {
+      "nombre": "high_stress_day",
+      "tipo_dato": "Int8",
+      "grupo": "variable_objetivo",
+      "descripcion": "TARGET: 1=día siguiente de alta tensión, 0=normal (33.2% positivos)",
+      "nulos_pct": 0.0,
+      "min": 0.0,
+      "max": 1.0,
+      "media": 0.3132,
+      "std": 0.4639
+    }
+  ]
+}
