@@ -3,7 +3,7 @@
 **Proyecto de portfolio
 ---
 
-## Resumen ejecutivo
+## Resumen 
 
 Este proyecto estudia la relación entre la geopolítica global, el mercado del crudo WTI y el contagio de los shocks energéticos al sistema financiero. A lo largo de tres fases metodológicamente encadenadas se construye, valida y activa sobre un evento real extremo una arquitectura analítica que va desde la ingeniería de variables históricas hasta la inferencia cruzada con mercados de predicción en tiempo real.
 
